@@ -1,0 +1,128 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  schemaType?: string;
+}
+
+const {
+  title = 'Background Changer – Free Online Image & Photo Background Changer',
+  description = 'Background Changer is a free, fast online image background changer and photo background editor. Remove background from image, change background color to white or blue, or upload custom backdrops.',
+  canonicalPath = '',
+} = Astro.props;
+
+const siteUrl = 'https://onlinebackgroundchange.com';
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="background changer, background changer online, online background changer, image background changer, photo background changer, change image background, change photo background, background remover, remove background from image, remove background from photo, photo background editor, image background editor, change background color, white background photo, blue background photo, custom background color, job application photo, job application photo background, ID photo background changer, passport photo background, photo editor online" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/logo-light.png`} />
+    <meta property="og:site_name" content="Background Changer" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteUrl}/logo-light.png`} />
+
+    <!-- JSON-LD Structured Data: WebSite & WebApplication Schemas -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          "url": siteUrl,
+          "name": "Background Changer",
+          "description": "Free online image background changer and photo background editor utility.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "WebApplication",
+          "@id": `${siteUrl}/#webapp`,
+          "name": "Background Changer",
+          "url": siteUrl,
+          "description": description,
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All",
+          "browserRequirements": "Requires JavaScript. HTML5 Canvas compatible browser.",
+          "featureList": [
+            "Instant AI image background changer and background remover",
+            "Change photo background to solid white, blue, or custom HEX/RGB colors",
+            "Upload custom image backgrounds with depth of field blur",
+            "Preset aspect ratios for job application photo, passport photo background, and ID cards",
+            "100% private client-side browser processing"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": `${siteUrl}/#organization`,
+          "name": "Background Changer",
+          "url": siteUrl,
+          "logo": `${siteUrl}/logo-light.png`,
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "suryaprasadrout1261@gmail.com",
+            "contactType": "customer support"
+          }
+        }
+      ]
+    })} />
+
+    <!-- Immediate Dark Mode Preference Resolver (Avoids FOUC) -->
+    <script is:inline>
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-150">
+    <Header currentPath={canonicalPath} />
+    <main class="flex-1 flex flex-col">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

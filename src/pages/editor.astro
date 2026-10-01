@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EditorApp } from '../components/editor/EditorApp';
+---
+
+<Layout
+  title="Photo Background Editor – Change Background Color & Crop"
+  description="Edit photo backgrounds online with custom colors, precise crop ratios, subject repositioning, and instant direct downloads."
+  canonicalPath="/editor"
+>
+  <div class="w-full py-4 md:py-8">
+    <EditorApp client:load />
+  </div>
+</Layout>

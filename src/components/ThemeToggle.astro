@@ -1,0 +1,43 @@
+---
+// Dark / Light Theme Toggle Component with LocalStorage persistence
+---
+
+<button
+  type="button"
+  id="theme-toggle"
+  class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer flex items-center justify-center"
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode"
+>
+  <!-- Sun icon (visible in dark mode) -->
+  <svg class="w-4 h-4 hidden dark:block text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14l-1.41 1.41"></path>
+  </svg>
+  <!-- Moon icon (visible in light mode) -->
+  <svg class="w-4 h-4 block dark:hidden text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+  </svg>
+</button>
+
+<script is:inline>
+  function setupThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    btn.onclick = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (isDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    };
+  }
+
+  setupThemeToggle();
+  document.addEventListener('astro:page-load', setupThemeToggle);
+  document.addEventListener('DOMContentLoaded', setupThemeToggle);
+</script>

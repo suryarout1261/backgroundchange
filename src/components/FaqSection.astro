@@ -1,0 +1,124 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+const faqs: FAQItem[] = [
+  {
+    q: "How does the online background change process work?",
+    a: "Our tool uses modern client-side AI image segmentation. When you upload a photo, it automatically detects the subject, removes the original background in milliseconds, and lets you replace it with any solid color (pure white, passport blue, custom HEX/RGB), transparent backdrop, or even upload your own custom background photo from your device."
+  },
+  {
+    q: "Can I upload my own custom background image instead of solid colors?",
+    a: "Yes! In the Background tab, switch to 'Upload Image Background' to upload any photo, landscape, office interior, or custom wallpaper from your device. You can choose fit modes (Cover, Contain, Fill) and adjust a Depth of Field (blur) slider to achieve professional portrait bokeh."
+  },
+  {
+    q: "Are my uploaded photos private and secure?",
+    a: "Yes, 100%. Online Background Changer processes all images locally inside your device's web browser memory. Your personal photos, IDs, resumes, and headshots are never uploaded to any remote server or stored in any database."
+  },
+  {
+    q: "Can I make official Passport, Visa, and ID card photos here?",
+    a: "Yes. We include pre-configured standard document aspect ratios such as US Passport (2×2 inches / 600×600 px), International Visa, 3:4 ID cards, and 1:1 squares, complete with face and eye alignment guides to meet official submission guidelines."
+  },
+  {
+    q: "Is Online Background Changer completely free?",
+    a: "Yes. Our tool is 100% free with no account creation, no sign-in, no monthly subscriptions, and no watermarks added to your downloaded photos."
+  },
+  {
+    q: "What file formats can I upload and download?",
+    a: "You can upload standard JPG, JPEG, PNG, and WebP image formats. When finished, you can export your photo in high-resolution JPG (standard for job/visa portals), transparent PNG, or modern lightweight WebP."
+  },
+  {
+    q: "Can I manually fine-tune lighting, colors, and subject positioning?",
+    a: "Yes. In the Adjust and Subject panels, you can either drag sliders or type exact numeric values into manual input boxes for Brightness, Contrast, Saturation, Exposure, Subject Move X/Y, Scale (30% to 250%), Rotation, and Drop Shadows."
+  },
+  {
+    q: "How does the step-by-step Undo and Redo work?",
+    a: "Every single effect and parameter adjustment is tracked discretely in a 50-step history stack. Clicking Undo steps backward one individual adjustment at a time rather than wiping out all changes at once. You can also use keyboard shortcuts Ctrl+Z and Ctrl+Y."
+  },
+  {
+    q: "What if my application portal has a maximum file size limit (e.g. under 200 KB)?",
+    a: "In the Export panel, you can choose between High, Medium, or Balanced quality compression, and customize your export pixel dimensions to easily meet strict government or college portal upload size limits."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<section id="faq" class="py-16 md:py-20 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <!-- Section Heading -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 mb-3 border border-blue-200 dark:border-blue-900">
+        Got Questions?
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        Frequently Asked Questions
+      </h2>
+      <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400">
+        Everything you need to know about changing image backgrounds, document presets, and client-side privacy.
+      </p>
+    </div>
+
+    <!-- Accordion FAQ Items using HTML5 <details> -->
+    <div class="space-y-3.5">
+      {faqs.map((faq, index) => (
+        <details
+          class="group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-200 hover:border-slate-300 dark:hover:border-slate-700 open:ring-1 open:ring-blue-500/30"
+          open={index === 0}
+        >
+          <summary class="flex items-center justify-between p-5 cursor-pointer list-none select-none font-bold text-sm sm:text-base text-slate-900 dark:text-white">
+            <span class="flex items-center gap-3">
+              <span class="w-6 h-6 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 text-xs font-bold flex items-center justify-center flex-shrink-0">
+                Q
+              </span>
+              <span>{faq.q}</span>
+            </span>
+            <span class="ml-4 flex-shrink-0 text-slate-400 group-open:rotate-180 transition-transform duration-200">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800/80">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Additional Help CTA -->
+    <div class="mt-12 text-center p-6 rounded-2xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-900/40">
+      <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">
+        Have another question not listed here?
+      </h3>
+      <p class="text-xs text-slate-600 dark:text-slate-400 mb-3">
+        Feel free to visit our How It Works guide or send our team an inquiry.
+      </p>
+      <div class="flex items-center justify-center gap-3 text-xs">
+        <a href="/how-it-works" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+          Read Full Documentation &rarr;
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">&bull;</span>
+        <a href="/contact" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+          Contact Support &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schema.org FAQPage Structured Data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+</section>
